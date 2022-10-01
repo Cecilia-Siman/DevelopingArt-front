@@ -1,9 +1,11 @@
-import CanvasDraw from "react-canvas-draw";
-import { useState,useRef } from "react";
+import { useState,useRef, useEffect } from "react";
+import CanvasDraw from "../../components/toolBar/indexEraser.js"
 
 export default function Home() {
   const [color, setColor] = useState("#000000");
   const [brushSize, setBrushSize] = useState(10);
+  const [erasing,setErasing] = useState(false);
+
 
   return (
     <div className="App">
@@ -25,8 +27,12 @@ export default function Home() {
           setBrushSize(Number(e.target.value));
         }}
       />
-      <div>
+      <button onClick={() => setErasing(!erasing)}>
+        Eraser
+      </button>
+      <div className="canvas-container">
         <CanvasDraw
+          erase={erasing}
           brushColor={color}
           brushRadius={brushSize}
           hideGrid
