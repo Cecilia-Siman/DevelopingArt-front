@@ -1,5 +1,6 @@
 import { useState,useRef, useEffect } from "react";
-import CanvasDraw from "../../components/toolBar/indexEraser.js"
+import CanvasDraw from "../../components/toolBar/indexEraser.js";
+import ToolBox from "../../components/toolBar/toolBox.js";
 
 export default function Home() {
   const [color, setColor] = useState("#000000");
@@ -11,25 +12,7 @@ export default function Home() {
     <div className="App">
       <h1>React-Canvas-Draw</h1>
       <h3>Basic canvas for studies</h3>
-      <input
-        type="color"
-        value={color}
-        onChange={(e) => {
-          setColor(e.target.value);
-        }}
-      />
-      <input
-        defaultValue={brushSize}
-        type="range"
-        min="0"
-        max="50"
-        onChange={(e) => {
-          setBrushSize(Number(e.target.value));
-        }}
-      />
-      <button onClick={() => setErasing(!erasing)}>
-        Eraser
-      </button>
+      <ToolBox  color={color} setColor={setColor} erasing={erasing} setErasing={setErasing} brushSize={brushSize} setBrushSize={setBrushSize}/>
       <div className="canvas-container">
         <CanvasDraw
           erase={erasing}

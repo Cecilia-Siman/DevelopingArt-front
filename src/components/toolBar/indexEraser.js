@@ -391,7 +391,8 @@ export default class extends PureComponent {
   drawPoints = ({ points, brushColor, brushRadius }) => {
     this.ctx.temp.lineJoin = "round";
     this.ctx.temp.lineCap = "round";
-    this.ctx.temp.strokeStyle = brushColor === "erase" ? "#dbb7bb" : brushColor;
+    //this.ctx.temp.strokeStyle = brushColor === "erase" ? "#dbb7bb" : brushColor;
+    this.ctx.temp.strokeStyle = brushColor === "erase" ? "#fff" : brushColor; // alter erase color to white
     this.ctx.drawing.globalCompositeOperation = brushColor === "erase" ? "destination-out" : "source-over";
 
     this.ctx.temp.clearRect(
