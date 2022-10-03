@@ -1,6 +1,7 @@
 import { useState,useRef, useEffect } from "react";
 import CanvasDraw from "../../components/toolBar/indexEraser.js";
 import ToolBox from "../../components/toolBar/toolBox.js";
+import Container from "./homeStyle.js";
 
 export default function Home() {
   const [color, setColor] = useState("#000000");
@@ -9,12 +10,11 @@ export default function Home() {
 
 
   return (
-    <div className="App">
-      <h1>React-Canvas-Draw</h1>
-      <h3>Basic canvas for studies</h3>
+    <Container>
       <ToolBox  color={color} setColor={setColor} erasing={erasing} setErasing={setErasing} brushSize={brushSize} setBrushSize={setBrushSize}/>
       <div className="canvas-container">
-        <CanvasDraw
+      <CanvasDraw
+          className='canvas'
           erase={erasing}
           brushColor={color}
           brushRadius={brushSize}
@@ -26,6 +26,6 @@ export default function Home() {
           }}
         />
       </div>
-    </div>
+    </Container>
   );
 }
