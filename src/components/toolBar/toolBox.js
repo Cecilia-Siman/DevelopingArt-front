@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import CanvasDraw from "./indexEraser.js";
 import Container from "./toolBoxStyle.js";
+import { FontawesomeIcon } from "@fortawesome/fontawesome-svg-core";
 
 export default function ToolBox(props) {
   return (
@@ -27,7 +28,12 @@ export default function ToolBox(props) {
             props.setBrushSize(Number(e.target.value));
           }}
         />
-        <button className={props.erasing ? 'eraserOn' : 'eraserOff'} onClick={() => props.setErasing(!props.erasing)}>Eraser</button>
+        <button
+          className={props.erasing ? "eraserOn" : "eraserOff"}
+          onClick={() => props.setErasing(!props.erasing)}
+        >
+          Eraser
+        </button>
       </div>
     </Container>
   );

@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 const Container = styled.div`
   background-color: #e0b3a5;
-  //background-color: #e89d97;
 
   width: 200px;
   height: 398px;
