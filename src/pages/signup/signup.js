@@ -1,29 +1,47 @@
 import { Container, FormStyle } from "../login/loginStyle.js";
-import React from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-
+import { LoginContext } from "../../contexts/loginContext.js";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function SignUp() {
-  //const { setUserName, setToken } = React.useContext(LoginContext);
-  const [password, setPassword] = React.useState("");
-  const [confirmPassword, setConfirmPassword] = React.useState("");
-  const [email, setEmail] = React.useState("");
-  const [userName, setUserName] = React.useState("");
+  const { setUserId, setUserName, setToken } = useContext(LoginContext);
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [newUserName, setNewUserName] = useState("");
   const navigate = useNavigate();
+
   function submitData(event) {
-    console.log("ok");
+    event.preventDefault();
+    const obj = {
+      email,
+      password,
+      userName: newUserName,
+      confirmPassword,
+    };
+    const req = axios.post("http://localhost:4000/signup", obj);
+    req.then(registered);
+    function registered(res) {
+      navigate("/login");
+    }
+    req.catch(error);
+    function error(er) {
+      console.log(er);
+    }
   }
+
   return (
     <Container>
-      <h1>Developing art 🎨</h1>
+      <h1>Welcome 😊</h1>
       <FormStyle>
         <form onSubmit={submitData}>
-        <input
+          <input
             type="name"
             id="name"
-            value={userName}
-            onChange={(e) => setUserName(e.target.value)}
+            value={newUserName}
+            onChange={(e) => setNewUserName(e.target.value)}
             required
             placeholder="User name"
           />

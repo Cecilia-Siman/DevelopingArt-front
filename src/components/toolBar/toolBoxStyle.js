@@ -2,13 +2,13 @@ import styled from "styled-components";
 
 const Container = styled.div`
   background-color: #e0b3a5;
-
   width: 200px;
   height: 398px;
   display: flex;
   border-radius: 5px;
   margin-left: 100px;
-  padding: 3px;
+  padding: 3px 10px;
+  box-sizing: border-box;
   flex-direction: column;
   align-items: center;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -47,12 +47,22 @@ const Container = styled.div`
     background: blue;
   }
 
+  .eraser{
+    display:flex;
+    width: 100%
+    align-items: center;
+    justify-content: center;
+  }
+
   button {
     margin-top: 30px;
-    width: 100%;
+    width: 60px;
     border: 2px solid #221f4c;
     border-radius: 5px;
-
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px;
     color: #221f4c;
     font-family: "Nunito", sans-serif;
     font-style: normal;

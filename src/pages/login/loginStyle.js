@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
   min-height: 100vh;
   width: 100%;
-  padding-top: 68px;
+  padding-top: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -26,11 +26,14 @@ export const Container = styled.div`
     &:hover {
       cursor: pointer;
     }
+  a{
+    text-decoration: underline;
+  }
   }
 `;
 
 export const FormStyle = styled.div`
-  margin-top: 52px;
+  margin-top: 22px;
   form {
     display: flex;
     flex-direction: column;

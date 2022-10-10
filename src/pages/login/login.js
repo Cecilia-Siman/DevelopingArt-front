@@ -1,20 +1,39 @@
 import { Container, FormStyle } from "./loginStyle";
-import React from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-
+import { LoginContext } from "../../contexts/loginContext.js";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function Login() {
-  //const { setUserName, setToken } = React.useContext(LoginContext);
-  const [password, setPassword] = React.useState("");
-  const [email, setEmail] = React.useState("");
+  const { setUserId, setUserName, setToken } = useContext(LoginContext);
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
   const navigate = useNavigate();
+
   function submitData(event) {
-    console.log("ok");
+    event.preventDefault();
+    const loginObj = {
+      email,
+      password,
+    };
+    const loginReq = axios.post("http://localhost:4000/login", loginObj);
+    loginReq.then(logged);
+    function logged(res) {
+      setUserId(res.data.userId);
+      setUserName(res.data.userName);
+      setToken(res.data.token);
+      navigate("/");
+    }
+    loginReq.catch(error);
+    function error(er) {
+      console.log(er);
+    }
   }
+
   return (
     <Container>
-      <h1>Developing art 🎨</h1>
+      <h1>Hi there 👋🏽</h1>
       <FormStyle>
         <form onSubmit={submitData}>
           <input
