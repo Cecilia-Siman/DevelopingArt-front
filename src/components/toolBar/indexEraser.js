@@ -232,6 +232,57 @@ export default class extends PureComponent {
     }
   };
 
+  getDataURL = (fileType, useBgImage, backgroundColour) => {
+    // Get a reference to the "drawing" layer of the canvas
+    let canvasToExport = this.canvas.drawing;
+
+    let context = canvasToExport.getContext("2d");
+
+    //cache height and width
+    let width = canvasToExport.width;
+    let height = canvasToExport.height;
+
+    //get the current ImageData for the canvas
+    let storedImageData = context.getImageData(0, 0, width, height);
+
+    //store the current globalCompositeOperation
+    var compositeOperation = context.globalCompositeOperation;
+
+    //set to draw behind current content
+    context.globalCompositeOperation = "destination-over";
+
+    // If "useBgImage" has been set to true, this takes precedence over the background colour parameter
+    if (useBgImage) {
+      if (!this.props.imgSrc) return "Background image source not set";
+
+      // Write the background image
+      this.drawImage();
+    } else if (backgroundColour != null) {
+      //set background color
+      context.fillStyle = backgroundColour;
+
+      //fill entire canvas with background colour
+      context.fillRect(0, 0, width, height);
+    }
+
+    // If the file type has not been specified, default to PNG
+    if (!fileType) fileType = "png";
+
+    // Export the canvas to data URL
+    let imageData = canvasToExport.toDataURL(`image/${fileType}`);
+
+    //clear the canvas
+    context.clearRect(0, 0, width, height);
+
+    //restore it with original / cached ImageData
+    context.putImageData(storedImageData, 0, 0);
+
+    //reset the globalCompositeOperation to what it was
+    context.globalCompositeOperation = compositeOperation;
+
+    return imageData;
+  };
+
   simulateDrawingLines = ({ lines, immediate }) => {
     // Simulate live-drawing of the loaded lines
     // TODO use a generator

@@ -1,12 +1,14 @@
-import { useState, useRef, useEffect, useContext } from "react";
+import { useState, useRef, useContext, useCallback } from "react";
 import CanvasDraw from "../../components/toolBar/indexEraser.js";
 import ToolBox from "../../components/toolBar/toolBox.js";
 import { Container, Title } from "./canvasStyle.js";
 import { LoginContext } from "../../contexts/loginContext.js";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function Canvas() {
-  const { setImage, token } = useContext(LoginContext);
+  const [dataUrl, setDataUrl] = useState("#");
+  const { token } = useContext(LoginContext);
   const [color, setColor] = useState("#000000");
   const [brushSize, setBrushSize] = useState(10);
   const [erasing, setErasing] = useState(false);
@@ -20,6 +22,37 @@ export default function Canvas() {
       navigate("/login");
     }
   }
+
+  function saveArtPiece(image) {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    if (title.length === 0) {
+      alert("Title and image must not be empty");
+    } else {
+      let obj = {
+        title,
+        image,
+      };
+      axios
+        .post("http://localhost:4000/pieces/create", obj, config)
+        .then((res) => {
+          localStorage.setItem("savedDrawing", "");
+          alert("Art piece saved :)");
+        })
+        .catch((error) => {
+          alert(error);
+        });
+    }
+  }
+
+  const handleDownload = useCallback(() => {
+    if (!canvas || !canvas.current) return;
+    console.log("downloading");
+    setDataUrl(canvas.current.getDataURL("png", false, "0xffffff"));
+  }, [canvas]);
 
   return (
     <>
@@ -75,17 +108,21 @@ export default function Canvas() {
           ) : (
             <button
               onClick={() => {
-                console.log(canvas.current.getSaveData());
-                localStorage.setItem(
-                  "savedDrawing",
-                  canvas.current.getSaveData()
-                );
-                alert("DataURL written to console");
+                const image = canvas.current.getSaveData();
+                saveArtPiece(image);
               }}
             >
               Save
             </button>
           )}
+          <button
+            onClick={() => {
+              const image = canvas.current.getDataURL("png", false, "0xffffff");
+              handleDownload();
+            }}
+          >
+            DataUrl
+          </button>
         </div>
       </Container>
     </>

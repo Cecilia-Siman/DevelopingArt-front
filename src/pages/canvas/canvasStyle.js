@@ -17,7 +17,7 @@ export const Container = styled.div`
     button {
       height: 50px;
       width: 150px;
-      border-radius: 5px;
+      border-radius: 30px;
       border: 2px solid #221f4c;
       margin-bottom: 20px;
       padding: 2px;

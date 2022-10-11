@@ -1,12 +1,10 @@
 import { Container, FormStyle } from "../login/loginStyle.js";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { LoginContext } from "../../contexts/loginContext.js";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export default function SignUp() {
-  const { setUserId, setUserName, setToken } = useContext(LoginContext);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [email, setEmail] = useState("");

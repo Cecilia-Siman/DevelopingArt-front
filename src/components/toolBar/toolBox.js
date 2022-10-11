@@ -1,8 +1,5 @@
-import { useState, useRef, useEffect } from "react";
-import CanvasDraw from "./indexEraser.js";
 import Container from "./toolBoxStyle.js";
-import { FontawesomeIcon } from "@fortawesome/fontawesome-svg-core";
-import { BsEraserFill, BsFillPencilFill } from "react-icons/bs";
+import { BsEraserFill } from "react-icons/bs";
 
 export default function ToolBox(props) {
   return (

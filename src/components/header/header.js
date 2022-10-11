@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 
 export default function Header() {
-  const { setUserId, setUserName, setToken } = useContext(LoginContext);
+  const { setUserId, setUserName, setToken, token } = useContext(LoginContext);
   return (
     <TopBar>
       <h1> 🎨 Developing art </h1>
@@ -17,9 +17,16 @@ export default function Header() {
         <Link to={`/canvas`}>
           <BiPalette className="icon" />
         </Link>
-        <Link to={`/login`}>
-          <BsPersonCircle className="icon" />
-        </Link>
+        {token.length === 0 ? (
+          <Link to={`/login`}>
+            <BsPersonCircle className="icon" />
+          </Link>
+        ) : (
+          <Link to={`/canvas`}>
+            <BsPersonCircle className="icon" />
+          </Link>
+        )}
+
         <Link
           to={`/`}
           onClick={() => {
