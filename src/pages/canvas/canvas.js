@@ -1,7 +1,7 @@
 import { useState, useRef, useContext, useCallback } from "react";
 import CanvasDraw from "../../components/toolBar/indexEraser.js";
 import ToolBox from "../../components/toolBar/toolBox.js";
-import { Container, Title } from "./canvasStyle.js";
+import { Container, Title, CanvasBackground } from "./canvasStyle.js";
 import { LoginContext } from "../../contexts/loginContext.js";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -24,6 +24,7 @@ export default function Canvas() {
   }
 
   function saveArtPiece(image) {
+    localStorage.removeItem("drawing");
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -39,7 +40,7 @@ export default function Canvas() {
       axios
         .post("http://localhost:4000/pieces/create", obj, config)
         .then((res) => {
-          localStorage.setItem("savedDrawing", "");
+          localStorage.setItem("drawing", "");
           alert("Art piece saved :)");
         })
         .catch((error) => {
@@ -49,6 +50,7 @@ export default function Canvas() {
   }
 
   const handleDownload = useCallback(() => {
+    // not working yet
     if (!canvas || !canvas.current) return;
     console.log("downloading");
     setDataUrl(canvas.current.getDataURL("png", false, "0xffffff"));
@@ -56,75 +58,80 @@ export default function Canvas() {
 
   return (
     <>
-      <Title>
-        <input
-          className="artTitle"
-          defaultValue={title}
-          onChange={(e) => setTitle(e.target.value)}
-          placeholder="Your art title"
-        />
-      </Title>
-      <Container>
-        <ToolBox
-          color={color}
-          setColor={setColor}
-          erasing={erasing}
-          setErasing={setErasing}
-          brushSize={brushSize}
-          setBrushSize={setBrushSize}
-        />
-        <div className="canvas-container">
-          <CanvasDraw
-            ref={canvas}
-            saveData={localStorage.getItem("savedDrawing")}
-            className="canvas"
-            erase={erasing}
-            brushColor={color}
-            brushRadius={brushSize}
-            hideGrid
-            lazyRadius={1}
-            style={{
-              boxShadow:
-                "0 13px 27px -5px rgba(50, 50, 93, 0.25),    0 8px 16px -8px rgba(0, 0, 0, 0.3)",
-            }}
+      <CanvasBackground>
+        <Title>
+          <input
+            className="artTitle"
+            defaultValue={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder="Your art title"
           />
-        </div>
-        <div className="sideBar">
-          <button onClick={() => canvas.current.undo()}>Undo</button>
-          <button onClick={() => canvas.current.clear()}>Clear canvas</button>
-          {token.length === 0 ? (
+        </Title>
+        <Container>
+          <ToolBox
+            color={color}
+            setColor={setColor}
+            erasing={erasing}
+            setErasing={setErasing}
+            brushSize={brushSize}
+            setBrushSize={setBrushSize}
+          />
+          <div className="canvas-container">
+            <CanvasDraw
+              ref={canvas}
+              saveData={localStorage.getItem("drawing")}
+              className="canvas"
+              erase={erasing}
+              brushColor={color}
+              brushRadius={brushSize}
+              hideGrid
+              lazyRadius={1}
+              style={{
+                boxShadow:
+                  "0 13px 27px -5px rgba(50, 50, 93, 0.25),    0 8px 16px -8px rgba(0, 0, 0, 0.3)",
+              }}
+            />
+          </div>
+          <div className="sideBar">
+            <button onClick={() => canvas.current.undo()}>Undo</button>
             <button
               onClick={() => {
-                console.log(canvas.current.getSaveData());
-                localStorage.setItem(
-                  "savedDrawing",
-                  canvas.current.getSaveData()
-                );
-                LoginBeforeSave();
+                localStorage.removeItem("drawing");
+                canvas.current.clear();
               }}
             >
-              Save
+              Clear canvas
             </button>
-          ) : (
+            {token.length === 0 ? (
+              <button
+                onClick={() => {
+                  console.log(canvas.current.getSaveData());
+                  localStorage.setItem("drawing", canvas.current.getSaveData());
+                  LoginBeforeSave();
+                }}
+              >
+                Save
+              </button>
+            ) : (
+              <button
+                onClick={() => {
+                  const image = canvas.current.getSaveData();
+                  saveArtPiece(image);
+                }}
+              >
+                Save
+              </button>
+            )}
             <button
               onClick={() => {
-                const image = canvas.current.getSaveData();
-                saveArtPiece(image);
+                alert(canvas.current.getDataURL("png", false, "0xffffff"));
               }}
             >
-              Save
+              DataUrl
             </button>
-          )}
-          <button
-            onClick={() => {
-              const image = canvas.current.getDataURL("png", false, "0xffffff");
-              handleDownload();
-            }}
-          >
-            DataUrl
-          </button>
-        </div>
-      </Container>
+          </div>
+        </Container>
+      </CanvasBackground>
     </>
   );
 }

@@ -1,10 +1,17 @@
 import styled from "styled-components";
 
+export const CanvasBackground = styled.div`
+  //background-color: #c0d1aa;
+  height: 100vh;
+  width: 100%;
+`;
+
 export const Container = styled.div`
   display: flex;
   box-sizing: border-box;
   flex-direction: row;
   justify-content: space-between;
+
   padding: 20px;
   .canvas {
     //margin-left: 150px;
@@ -32,12 +39,35 @@ export const Container = styled.div`
       }
     }
   }
-
+  .canvas-container-mobile,
+  .mobileToolBox {
+    display: none;
+  }
   @media (max-width: 612px) {
     display: flex;
     box-sizing: border-box;
     flex-direction: column;
     .canvas {
+    }
+    .canvas-container-mobile,
+    .mobileToolBox {
+      display: flex;
+    }
+    .canvas-container-mobile {
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .sideBar {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+    }
+    .toolBox {
+      display: none;
     }
   }
 `;
@@ -51,7 +81,7 @@ export const Title = styled.div`
   input {
     font-family: "Nunito", sans-serif;
     font-size: 24px;
-    background-color: #c0d1aa;
+    background: transparent;
     box-sizing: border-box;
     text-align: center;
     color: #000;

@@ -10,28 +10,8 @@ export default function ArtPosts(props) {
       <p>
         {props.title} - <span>by {props.userName}</span>
       </p>
-      <div className="regularCanvas">
-        <CanvasDraw
-          ref={canvas}
-          hideGrid
-          saveData={localStorage.getItem("savedDrawing")}
-          className="canvas"
-        />
-      </div>
-      <div className="mobileCanvas">
-        <CanvasDraw
-          canvasWidth={"150px"}
-          canvasHeight={"150px"}
-          hideGrid
-          saveData={props.image}
-          className="canvas"
-        />
-      </div>
+      <div></div>
     </Post>
   );
 }
 
-/* <CanvasDraw
-        saveData={props.image}
-        className="canvas"
-      /> */

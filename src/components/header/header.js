@@ -22,7 +22,7 @@ export default function Header() {
             <BsPersonCircle className="icon" />
           </Link>
         ) : (
-          <Link to={`/canvas`}>
+          <Link to={`/myPage`}>
             <BsPersonCircle className="icon" />
           </Link>
         )}

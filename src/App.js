@@ -3,6 +3,7 @@ import Canvas from "./pages/canvas/canvas.js";
 import Login from "./pages/login/login.js";
 import SignUp from "./pages/signup/signup.js";
 import Home from "./pages/home/home.js";
+import PersonalPage from "./pages/personalPage/personalPage.js";
 import Header from "./components/header/header.js";
 import { LoginContext } from "./contexts/loginContext.js";
 import { useState } from "react";
@@ -32,6 +33,7 @@ function App() {
           <Route path="/canvas" element={<Canvas />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/myPage" element={<PersonalPage />} />
         </Routes>
       </BrowserRouter>
     </LoginContext.Provider>

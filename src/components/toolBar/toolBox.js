@@ -1,11 +1,12 @@
 import Container from "./toolBoxStyle.js";
 import { BsEraserFill } from "react-icons/bs";
+import { useState } from "react";
 
 export default function ToolBox(props) {
   return (
     <Container>
       <h3>Tool Box 🎨</h3>
-      <div>
+      <div className="tools">
         <p>Color picker</p>
         <input
           className="color"

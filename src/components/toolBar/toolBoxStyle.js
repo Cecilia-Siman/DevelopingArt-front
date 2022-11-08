@@ -3,10 +3,10 @@ import styled from "styled-components";
 const Container = styled.div`
   background-color: #e0b3a5;
   width: 200px;
-  height: 398px;
   display: flex;
   border-radius: 5px;
   margin-left: 100px;
+  margin-bottom: 20px;
   padding: 3px 10px;
   box-sizing: border-box;
   flex-direction: column;
@@ -30,6 +30,9 @@ const Container = styled.div`
     margin: 20px 0px 0px 0px;
     padding-bottom: 6px;
     border-bottom: 1px solid #b5363a;
+  }
+  .tools {
+    height: 338px;
   }
   input {
     outline: 0;
@@ -77,6 +80,16 @@ const Container = styled.div`
   .eraserOn {
     background-color: #221f4c;
     color: #fff;
+  }
+
+  @media (max-width: 612px) {
+    h3 {
+      margin: 10px 0px 5px 0px;
+      border-bottom: none;
+    }
+    .tools {
+      height: 250px;
+    }
   }
 `;
 

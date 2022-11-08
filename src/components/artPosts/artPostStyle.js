@@ -1,12 +1,15 @@
 import styled from "styled-components";
 
 export const Post = styled.div`
-  //width: 200px;
-  //height: 200px;
-  border-radius: 5px;
+  width: 200px;
+  height: 200px;
+  border-radius: 10px;
   padding: 10px;
   margin: 20px;
   background-color: #e8b3a5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   p {
     font-size: 18px;
     font-style: bold;
@@ -19,14 +22,22 @@ export const Post = styled.div`
     height: 30px;
   }
   div {
-    heigth: 100%;
-    width: 100%;
+    height: 120px;
+    width: 120px;
+    background-color: white;
     margin-top: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
   }
-  .mobileCanvas {
-    display: none;
+
+  @media (max-width: 612px) {
+    width: 150px;
+    height: 180px;
+    div{
+      height: 100px;
+      width: 100px;
+      margin-bottom: 10px;
+    }
   }
 `;
