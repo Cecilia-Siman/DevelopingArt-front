@@ -7,11 +7,9 @@ export default function ArtPosts(props) {
   localStorage.setItem("savedDrawing", props.image);
   return (
     <Post>
-      <p>
-        {props.title} - <span>by {props.userName}</span>
-      </p>
       <div></div>
+      <p>{props.title}</p>
+      <span>by {props.userName}</span>
     </Post>
   );
 }
-

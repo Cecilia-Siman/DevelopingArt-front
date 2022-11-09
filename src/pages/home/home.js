@@ -22,7 +22,13 @@ export default function Home() {
     <Container>
       <h2>Art gallery</h2>
       <Gallery>
-        {listPosts.length === 0 ? <p>Nothing here yet :(</p> : <ListPieces />}
+        {listPosts.length === 0 ? (
+          <p>Nothing here yet :(</p>
+        ) : (
+          <>
+            <ListPieces /> <ListPieces />
+          </>
+        )}
       </Gallery>
     </Container>
   );

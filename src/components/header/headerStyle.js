@@ -26,6 +26,9 @@ export const TopBar = styled.div`
   }
   .icon {
     margin-right: 20px;
+    :hover {
+      color: white;
+    }
   }
 
   @media (max-width: 612px) {
