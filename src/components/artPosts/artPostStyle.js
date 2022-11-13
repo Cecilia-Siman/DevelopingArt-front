@@ -32,6 +32,10 @@ export const Post = styled.div`
     justify-content: center;
     align-items: center;
   }
+  img {
+    width: 60px;
+    height: 60px;
+  }
 
   @media (max-width: 612px) {
     width: 150px;

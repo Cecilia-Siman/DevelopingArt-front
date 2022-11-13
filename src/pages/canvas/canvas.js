@@ -115,7 +115,12 @@ export default function Canvas() {
             ) : (
               <button
                 onClick={() => {
-                  const image = canvas.current.getSaveData();
+                  //const image = canvas.current.getSaveData();
+                  const image = canvas.current.getDataURL(
+                    "png",
+                    false,
+                    "0xffffff"
+                  );
                   saveArtPiece(image);
                 }}
               >
@@ -124,7 +129,7 @@ export default function Canvas() {
             )}
             <button
               onClick={() => {
-                alert(canvas.current.getDataURL("png", false, "0xffffff"));
+                alert(canvas.current.getDataURL("png", false, "#fff"));
               }}
             >
               DataUrl
