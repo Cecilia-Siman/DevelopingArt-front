@@ -105,7 +105,6 @@ export default function Canvas() {
             {token.length === 0 ? (
               <button
                 onClick={() => {
-                  console.log(canvas.current.getSaveData());
                   localStorage.setItem("drawing", canvas.current.getSaveData());
                   LoginBeforeSave();
                 }}

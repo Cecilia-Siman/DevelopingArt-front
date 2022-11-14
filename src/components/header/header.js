@@ -26,17 +26,22 @@ export default function Header() {
             <BsPersonCircle className="icon" />
           </Link>
         )}
-
-        <Link
-          to={`/`}
-          onClick={() => {
-            setToken("");
-            setUserId("");
-            setUserName("");
-          }}
-        >
-          <BiExit className="icon" />
-        </Link>
+        {token.length === 0 ? (
+          ""
+        ) : (
+          <Link
+            to={`/`}
+            onClick={() => {
+              setToken("");
+              setUserId("");
+              setUserName("");
+              localStorage.removeItem("token");
+              localStorage.removeItem("userId");
+            }}
+          >
+            <BiExit className="icon" />
+          </Link>
+        )}
       </div>
     </TopBar>
   );

@@ -23,6 +23,8 @@ export default function Login() {
       setUserId(res.data.userId);
       setUserName(res.data.userName);
       setToken(res.data.token);
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("userId", res.data.userId);
       navigate("/");
     }
     loginReq.catch(error);

@@ -6,12 +6,21 @@ import Home from "./pages/home/home.js";
 import PersonalPage from "./pages/personalPage/personalPage.js";
 import Header from "./components/header/header.js";
 import { LoginContext } from "./contexts/loginContext.js";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
   const [userId, setUserId] = useState("");
   const [userName, setUserName] = useState("");
   const [token, setToken] = useState("");
+  useEffect(() => {
+    const savedToken = localStorage.getItem("token");
+    const savedId = localStorage.getItem("userId");
+    if (savedToken) {
+      setToken(savedToken);
+      setUserId(savedId);
+    }
+  }, []);
+
   const [imageData, setImageData] = useState({});
   return (
     <LoginContext.Provider
