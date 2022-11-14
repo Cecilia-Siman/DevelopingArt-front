@@ -29,9 +29,5 @@ export const Gallery = styled.div`
   justify-content: center;
   align-items: center;
   padding: 10px;
-  p {
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-  }
+  
 `;

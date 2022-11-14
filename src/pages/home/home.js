@@ -20,13 +20,12 @@ export default function Home() {
   }
   return (
     <Container>
-      <h2>Art gallery</h2>
       <Gallery>
         {listPosts.length === 0 ? (
           <p>Nothing here yet :(</p>
         ) : (
           <>
-            <ListPieces /> <ListPieces />
+            <ListPieces />
           </>
         )}
       </Gallery>

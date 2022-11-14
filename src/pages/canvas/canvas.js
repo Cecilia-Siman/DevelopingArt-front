@@ -119,7 +119,7 @@ export default function Canvas() {
                   const image = canvas.current.getDataURL(
                     "png",
                     false,
-                    "0xffffff"
+                    "white"
                   );
                   saveArtPiece(image);
                 }}
@@ -129,7 +129,7 @@ export default function Canvas() {
             )}
             <button
               onClick={() => {
-                alert(canvas.current.getDataURL("png", false, "#fff"));
+                alert(canvas.current.getDataURL("png", false, "white"));
               }}
             >
               DataUrl
